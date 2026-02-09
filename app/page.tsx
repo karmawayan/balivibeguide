@@ -1,35 +1,36 @@
-import Hero from "./components/Hero";
-import ArticleCard from "./components/ArticleCard";
-import Sidebar from "./components/Sidebar";
+import Link from "next/link";
 
-export default function Home() {
+const articles = [
+  {
+    slug: "bali-travel-tips",
+    title: "Bali Travel Tips for First-Time Visitors",
+    excerpt:
+      "Essential Bali travel tips covering culture, transport, money, and etiquette.",
+    date: "Jan 10, 2026",
+  },
+];
+
+export default function BlogPage() {
   return (
-    <main className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-      
-      {/* MAIN CONTENT */}
-      <section className="lg:col-span-3 space-y-6">
-        <Hero />
+    <main className="max-w-5xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold mb-6">Bali Travel News</h1>
 
-        <h2 className="text-2xl font-bold">Latest Bali News</h2>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <ArticleCard
-            title="Top 10 Things To Do in Bali for First-Time Visitors"
-            excerpt="Discover must-see destinations, hidden gems, and local tips for your Bali adventure."
-            slug="/blog/top-10-things-to-do-in-bali"
-          />
-          <ArticleCard
-            title="Bali Travel Tips: How to Save Money in 2026"
-            excerpt="Smart budgeting tips to enjoy Bali without overspending."
-            slug="/blog/bali-travel-tips-save-money"
-          />
-        </div>
-      </section>
-
-      {/* SIDEBAR */}
-      <aside className="space-y-6">
-        <Sidebar />
-      </aside>
+      <div className="space-y-6">
+        {articles.map((article) => (
+          <article
+            key={article.slug}
+            className="border rounded-xl p-5 hover:shadow-md transition"
+          >
+            <h2 className="text-xl font-semibold mb-2">
+              <Link href={`/blog/${article.slug}`}>
+                {article.title}
+              </Link>
+            </h2>
+            <p className="text-gray-600 mb-2">{article.excerpt}</p>
+            <p className="text-sm text-gray-400">{article.date}</p>
+          </article>
+        ))}
+      </div>
     </main>
   );
 }
